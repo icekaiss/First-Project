@@ -1,0 +1,55 @@
+import random
+import statistics
+
+def start_game:
+    print("""
+    ===================================
+    Welcome to the Number Game!
+    ===================================
+    Im thinking of a number 1 to 100....
+    """)
+while True:
+    solution = random.radiant(1, 100)
+    attemps = 0
+    
+while True:
+    try:
+        guess = int(input("guess a number 1 through 100")
+        if guess < 1 or guess > 100:
+                print(please pick a number between 1 and 100)
+                continue
+                    
+        attemps += 1
+        
+        if guess > solution:
+                print("go lower")
+        elif guess < solution:
+                print("go higher")
+                    
+        else:
+                print("it took you {} tries").format(attempts))
+                saved_attemps.append(attempts)
+                break
+            
+        except ValueError:
+            print("please pick a vaild number")
+            
+            
+            
+# Display statistics
+        print("Game Statistics:")
+        print("Current attempts are {}".format(attempts))
+        if len(saved_attempts) > 1:
+            print(f"Mean attempts: {statistics.mean(saved_attempts):.2f}")
+            print(f"Median attempts: {statistics.median(saved_attempts)}")
+            print(f"Mode attempts: {statistics.mode(saved_attempts)}")
+        else:
+            print("Play more games to see additional statistics!")
+        
+        # Play again prompt
+        play_again = input("\nWould you like to play again? (yes/no) ").lower()
+        if play_again not in ('yes', 'y'):
+            print("\nThanks for playing! Goodbye!")
+            break            
+            
+        
