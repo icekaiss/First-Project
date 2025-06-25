@@ -1,0 +1,70 @@
+import random
+import statistics
+
+def start_game():
+    """Main function to run the number guessing game."""
+    
+    print("""
+    ---------------------------------------
+    Welcome to the Number Guessing Game!
+    ---------------------------------------
+    """)
+    
+    attempts_list = []
+    
+    while True:
+        # Generate random number between 1 and 100
+        solution = random.randint(1, 100)
+        attempts = 0
+        
+        print("\nI'm thinking of a number between 1 and 100...")
+        
+        while True:
+            try:
+                guess = int(input("What's your guess? (1-100): "))
+                
+                # Validate input
+                if guess < 1 or guess > 100:
+                    print("Please enter a number between 1 and 100.")
+                    continue
+                    
+                attempts += 1
+                
+                if guess > solution:
+                    print("It's lower")
+                elif guess < solution:
+                    print("It's higher")
+                else:
+                    print(f"\nGot it! You guessed it in {attempts} attempts!")
+                    attempts_list.append(attempts)
+                    break
+                    
+            except ValueError:
+                print("Please enter a valid integer.")
+        
+        # Calculate statistics
+        mean = statistics.mean(attempts_list)
+        median = statistics.median(attempts_list)
+        
+        # Mode might not exist (all values unique), so we use try/except
+        try:
+            mode = statistics.mode(attempts_list)
+        except statistics.StatisticsError:
+            mode = "No mode (all attempts counts are unique)"
+        
+        print("\nGame Statistics:")
+        print(f"- Current game attempts: {attempts}")
+        print(f"- Mean of all attempts: {mean:.2f}")
+        print(f"- Median of all attempts: {median}")
+        print(f"- Mode of all attempts: {mode}")
+        
+        # Ask to play again
+        play_again = input("\nWould you like to play again? (yes/no): ").lower()
+        if play_again not in ('yes', 'y'):
+            print("\nThanks for playing! Goodbye!")
+            print(f"Your final stats - Games played: {len(attempts_list)}, Best attempt: {min(attempts_list) if attempts_list else 'N/A'}")
+            break
+
+# Start the game
+if __name__ == '__main__':
+    start_game()
